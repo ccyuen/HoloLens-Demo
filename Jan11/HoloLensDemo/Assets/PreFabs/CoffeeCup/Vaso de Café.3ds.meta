@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: 2def9b4487e391c45859eb276f09d4ba
+timeCreated: 1483983275
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Booleano_1
+    100002: Cilin
+    100004: Cilindro
+    100006: logo_solo
+    100008: tapa
+    100010: TooBig0
+    100012: TooBig1
+    100014: TooBig2
+    100016: TooBig3
+    100018: TooBig4
+    100020: //RootNode
+    100022: vaso_base_
+    400000: Booleano_1
+    400002: Cilin
+    400004: Cilindro
+    400006: logo_solo
+    400008: tapa
+    400010: TooBig0
+    400012: TooBig1
+    400014: TooBig2
+    400016: TooBig3
+    400018: TooBig4
+    400020: //RootNode
+    400022: vaso_base_
+    2300000: Booleano_1
+    2300002: Cilin
+    2300004: Cilindro
+    2300006: logo_solo
+    2300008: tapa
+    2300010: TooBig0
+    2300012: TooBig1
+    2300014: TooBig2
+    2300016: TooBig3
+    2300018: TooBig4
+    2300020: //RootNode
+    2300022: vaso_base_
+    3300000: Booleano_1
+    3300002: Cilin
+    3300004: Cilindro
+    3300006: logo_solo
+    3300008: tapa
+    3300010: TooBig0
+    3300012: TooBig1
+    3300014: TooBig2
+    3300016: TooBig3
+    3300018: TooBig4
+    3300020: //RootNode
+    3300022: vaso_base_
+    4300000: vaso_final
+    4300002: Booleano_1
+    4300004: tapa
+    4300006: Cilindro
+    4300008: TooBig0
+    4300010: TooBig1
+    4300012: vaso_base_
+    4300014: Cilin
+    4300016: TooBig2
+    4300018: TooBig3
+    4300020: TooBig4
+    4300022: logo_solo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
