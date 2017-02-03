@@ -4,25 +4,31 @@ using UnityEngine.Windows.Speech;
 
 public class SpeechHandler : MonoBehaviour
 {
-    public string HidePlaneCmd = "hide plane";
-    public GameObject Plane;
-
-    public string ShootCmd = "shoot";
+    public GameObject world;
     public CannonBehavior Cannon;
+    public AudioSource backgroundMusic;
 
+    public string HidePlaneCmd = "hide world";
+    public string ShowPlaneCMD = "show world";
     public string ResetSceneCmd = "reset scene";
-    public string ChangeShootCmd = "enable";
+    public string ShootCmd = "fire";
+    public string EnableShootCmd = "enable";
+    public string DisableShootCmd = "disable";
+    public string EnableMusicCmd = "on";
+    public string DisableMusicCmd = "off";
     public string SpawnCmd = "spawn";
     public string DestroyCmd = "destroy";
+
     private bool isGazing = false;
 
     private KeywordRecognizer _keywordRecognizer;
 
     void Start()
     {
-        _keywordRecognizer = new KeywordRecognizer(new[] { HidePlaneCmd, ResetSceneCmd, ShootCmd, ChangeShootCmd });
+        _keywordRecognizer = new KeywordRecognizer(new[] { HidePlaneCmd, ShowPlaneCMD, ResetSceneCmd, ShootCmd, EnableShootCmd, DisableShootCmd, EnableMusicCmd, DisableMusicCmd });
         _keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         _keywordRecognizer.Start();
+        backgroundMusic = GetComponent<AudioSource>();
     }
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -30,7 +36,11 @@ public class SpeechHandler : MonoBehaviour
         var cmd = args.text;
         if (cmd == HidePlaneCmd)
         {
-            Plane.SetActive(false);
+            world.SetActive(false);
+        }
+        else if (cmd == ShowPlaneCMD)
+        {
+            world.SetActive(true);
         }
         else if (cmd == ShootCmd)
         {
@@ -40,34 +50,58 @@ public class SpeechHandler : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
         }
-        else if (cmd == ChangeShootCmd)
+        else if (cmd == EnableShootCmd)
         {
             Cannon.enableShoot();
-        }/*
+        }
+        else if (cmd == DisableShootCmd)
+        {
+            Cannon.disableShoot();
+        }
+        else if (cmd == EnableMusicCmd)
+        {
+           playBackgroundMusic(1);
+        }
+        else if (cmd == DisableMusicCmd)
+        {
+            playBackgroundMusic(0);
+        }
         else if (cmd == SpawnCmd)
         {
-            spawn();   
+            //spawn();   
         }
         else if (cmd == DestroyCmd)
         {
-            destroy();
-        }*/
+            //destroy();
+        }
     }
 
-    /*
+    private void playBackgroundMusic(int num)
+    {
+        if (num == 1) // play music
+        {
+            backgroundMusic.mute = false;
+        }
+        else if (num == 0) // stop music
+        {
+            backgroundMusic.mute = true;
+        }
+    }
+
+    
     // create more holograms that is being gazed at
     void spawn()
     {
-        if (FocusedObject != null)
-            GameObject newObject = (GameObject)Instantiate(Resources.Load("bulbasaur"));
+        //if (FocusedObject != null)
+            //GameObject newObject = (GameObject)Instantiate(Resources.Load("bulbasaur"));
     }
 
     // destroy hologram that is being gazed at
     void destroy()
     {
 
-    }*/
-   
+    }
+
 
     private void OnDestroy()
     {

@@ -9,11 +9,10 @@ public class CannonBehavior : MonoBehaviour
     private GestureRecognizer _gestureRecognizer;
 
     public float ForceMagnitude = 300f;
-    public GameObject GazeCursor;
     public Material CannonMaterial;
     public AudioSource ShootSound;
     public AudioClip CollisionClip;
-    public bool shoot = false;
+    bool shoot = false;
 
     void Start()
     {
@@ -36,8 +35,14 @@ public class CannonBehavior : MonoBehaviour
 
     public void enableShoot()
     {
-        shoot = !shoot;
+        shoot = true;
     }
+
+    public void disableShoot()
+    {
+        shoot = false;
+    }
+
 
     public void Shoot()
     {
@@ -57,17 +62,6 @@ public class CannonBehavior : MonoBehaviour
         eyeball.AddComponent<AudioCollisionBehaviour>().SoundSoftCrash = CollisionClip;
     }
 
-    void Update()
-    {
-        if (GazeCursor == null) return;
-
-        var raycastHits = Physics.RaycastAll(transform.position, transform.forward);
-        var firstHit = raycastHits.OrderBy(r => r.distance).FirstOrDefault();
-
-        GazeCursor.transform.position = firstHit.point;
-        GazeCursor.transform.forward = firstHit.normal;
-    }
-
     private void OnDestroy()
     {
         if (_gestureRecognizer != null)
@@ -79,5 +73,4 @@ public class CannonBehavior : MonoBehaviour
             _gestureRecognizer.Dispose();
         }
     }
-
 }
