@@ -8,6 +8,9 @@ public class GazeGestureManager : MonoBehaviour
     // Represents the hologram that is currently being gazed at.
     public GameObject FocusedObject { get; private set; }
 
+    public Camera mainCamera;
+
+
     GestureRecognizer recognizer;
 
     // Use this for initialization
@@ -31,13 +34,15 @@ public class GazeGestureManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (mainCamera == null) return;
         // Figure out which hologram is focused this frame.
         GameObject oldFocusObject = FocusedObject;
 
         // Do a raycast into the world based on the user's
         // head position and orientation.
-        var headPosition = Camera.main.transform.position;
-        var gazeDirection = Camera.main.transform.forward;
+        var headPosition = mainCamera.transform.position;
+        var gazeDirection = mainCamera.transform.forward;
 
         RaycastHit hitInfo;
         if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))

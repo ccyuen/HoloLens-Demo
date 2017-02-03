@@ -6,7 +6,7 @@ public class SpeechHandler : MonoBehaviour
 {
     public GameObject world;
     public CannonBehavior Cannon;
-    public AudioSource backgroundMusic;
+    //public AudioSource backgroundMusic;
 
     public string HidePlaneCmd = "hide world";
     public string ShowPlaneCMD = "show world";
@@ -28,7 +28,7 @@ public class SpeechHandler : MonoBehaviour
         _keywordRecognizer = new KeywordRecognizer(new[] { HidePlaneCmd, ShowPlaneCMD, ResetSceneCmd, ShootCmd, EnableShootCmd, DisableShootCmd, EnableMusicCmd, DisableMusicCmd });
         _keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         _keywordRecognizer.Start();
-        backgroundMusic = GetComponent<AudioSource>();
+        //backgroundMusic = GetComponent<AudioSource>();
     }
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -57,7 +57,7 @@ public class SpeechHandler : MonoBehaviour
         else if (cmd == DisableShootCmd)
         {
             Cannon.disableShoot();
-        }
+        }/*
         else if (cmd == EnableMusicCmd)
         {
            playBackgroundMusic(1);
@@ -68,14 +68,15 @@ public class SpeechHandler : MonoBehaviour
         }
         else if (cmd == SpawnCmd)
         {
-            //spawn();   
+            spawn();   
         }
         else if (cmd == DestroyCmd)
         {
-            //destroy();
-        }
+            destroy();
+        }*/
     }
 
+    /*
     private void playBackgroundMusic(int num)
     {
         if (num == 1) // play music
@@ -86,7 +87,7 @@ public class SpeechHandler : MonoBehaviour
         {
             backgroundMusic.mute = true;
         }
-    }
+    }*/
 
     
     // create more holograms that is being gazed at
