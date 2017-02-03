@@ -6,6 +6,7 @@ public class SpeechHandler : MonoBehaviour
 {
     public GameObject world;
     public CannonBehavior Cannon;
+    bool selected = false;
     //public AudioSource backgroundMusic;
 
     public string HidePlaneCmd = "hide world";
@@ -29,6 +30,12 @@ public class SpeechHandler : MonoBehaviour
         _keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         _keywordRecognizer.Start();
         //backgroundMusic = GetComponent<AudioSource>();
+    }
+
+    void OnSelect()
+    {
+        // On each Select gesture, toggle whether the user is in placing mode.
+        selected = !selected;
     }
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -65,15 +72,17 @@ public class SpeechHandler : MonoBehaviour
         else if (cmd == DisableMusicCmd)
         {
             playBackgroundMusic(0);
-        }
+        }*/
         else if (cmd == SpawnCmd)
         {
-            spawn();   
+            if (selected)
+                spawn();   
         }
         else if (cmd == DestroyCmd)
         {
-            destroy();
-        }*/
+            if (selected)
+                destroy();
+        }
     }
 
     /*
@@ -100,7 +109,7 @@ public class SpeechHandler : MonoBehaviour
     // destroy hologram that is being gazed at
     void destroy()
     {
-
+        //destroy(gameObject);
     }
 
 

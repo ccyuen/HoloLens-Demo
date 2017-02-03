@@ -5,20 +5,23 @@ using UnityEngine;
 public class Flying : MonoBehaviour {
 
     bool selected = false;
-    int y = 0;
+   // Vector3 angle = new Vector3(0, 0, 0);
 
     public GameObject ship;
-    private Rigidbody shiprb;
+    public GameObject path;
+    //private Rigidbody shiprb;
     public ParticleSystem leftBooster;
     public ParticleSystem rightBooster;
+    public float speed = 3f;
 
     void Start()
     {
         //y = 0;
         selected = false;
-        shiprb = ship.GetComponent<Rigidbody>();
+        //shiprb = ship.GetComponent<Rigidbody>();
         leftBooster.Stop();
         rightBooster.Stop();
+        // initialize angle
     }
 
     void OnSelect()
@@ -32,31 +35,24 @@ public class Flying : MonoBehaviour {
         // If the user has selected the ship, turn off gravity and turn on boosters for lift off
         if (selected)
         {
-            // move object
-            if (y == 0) ship.transform.Translate(0, 1, 0);
-            y++;
-
+            // rotate object
+            path.transform.Rotate(Vector3.down * speed);
             // play rocket launch sound clip
             //audio.Play();
 
             // turn on particle systems
             leftBooster.Play();
             rightBooster.Play();
-            // turn off gravity
-            shiprb.useGravity = false;
-            shiprb.isKinematic = true;
         }
         // If the user has not selected the ship, keep gravity on and boosters turned off
         else
         {
-
+            // stop object from rotating
+            path.transform.Rotate(Vector3.zero);
+            //path.transform.eulerAngles = new Vector3(0, path.transform.localRotation.y, 0);
             // turn off particle systems
             leftBooster.Stop();
             rightBooster.Stop();
-
-            // turn on gravity while not flying
-            shiprb.useGravity = true;
-            shiprb.isKinematic = false;
         }
     }
 }
