@@ -30,7 +30,7 @@ public class Flying : MonoBehaviour, IInputClickHandler
     {
         // On each Select gesture, toggle whether the user is in placing mode.
         selected = !selected;
-    }
+    } 
 
     void Update()
     {

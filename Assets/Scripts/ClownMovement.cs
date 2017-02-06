@@ -4,39 +4,43 @@ using UnityEngine;
 
 public class ClownMovement : MonoBehaviour
 {
-
-
-    //public Vector3 pos1;
-    //public Vector3 pos2;
-
     private float speed = 0.25f;
-    private bool limit;
     private bool notHit;
+    private bool limit = false;
+    HingeJoint hinge;
 
     void Start()
     {
-        limit = false;
-        notHit = false;
+        notHit = true;
+        hinge = gameObject.GetComponent<HingeJoint>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.tag.Equals("MovingClown")) {
+        if (gameObject.tag.Equals("BlueClown"))
+        {
             if (notHit)
             {
-                if (transform.position.z <= -0.4f)
+                if (transform.position.z <= -0.4620051f)
+                {
                     limit = true;
-                else if (transform.position.z >= 0.37f)
+                }
+                else if (transform.position.z >= 0.274f)
+                {
                     limit = false;
+                }
+
 
                 switch (limit)
                 {
                     case true:
-                        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+                        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+                        hinge.anchor = new Vector3(-0.085f, -0.117f, 0.107f);
                         break;
                     case false:
-                        transform.Translate(Vector3.back * Time.deltaTime * speed, Space.Self);
+                        transform.Translate(Vector3.back * Time.deltaTime * speed, Space.World);
+                        hinge.anchor = new Vector3(-0.085f, -0.117f, 0.107f);
                         break;
                 }
             }
@@ -49,33 +53,43 @@ public class ClownMovement : MonoBehaviour
         {
             if (gameObject.tag.Equals("BlueClown"))
             {
-                gameObject.SendMessageUpwards("Blue");
-                notHit = false;
-                transform.Translate(Vector3.zero);
-                gameObject.AddComponent<HingeJoint>();
-                HingeJoint hinge = gameObject.GetComponent<HingeJoint>();
+                gameObject.BroadcastMessage("Blue"); // score
+                notHit = false; // stop update for movement
+                transform.Translate(Vector3.zero, Space.World); // stop movement
+
+
+                // add the hinge
+                /*gameObject.AddComponent<HingeJoint>();
+                HingeJoint hinge = this.GetComponent<HingeJoint>();
                 JointLimits limits = hinge.limits;
                 hinge.useLimits = true;
+                hinge.enableCollision = true;
+                hinge.enablePreprocessing = true;
+                hinge.autoConfigureConnectedAnchor = true;
+                hinge.axis = new Vector3(0, 0, 0);
+                hinge.connectedAnchor = new Vector3(2.016f, 0.3929849f, -0.4620051f);
                 limits.min = 0;
                 limits.bounciness = 0;
                 limits.bounceMinVelocity = 0;
                 limits.max = 90;
+                hinge.breakForce = Mathf.Infinity;
+                hinge.breakTorque = Mathf.Infinity;
                 hinge.limits = limits;
-                hinge.anchor = new Vector3(-0.14f, -0.117f, 0.107f);
+                hinge.anchor = new Vector3(-0.14f, -0.117f, 0.107f);*/
             }
             else if (gameObject.tag.Equals("RedClown"))
             {
-                gameObject.SendMessageUpwards("Red");
+                gameObject.BroadcastMessage("Red");
+
             }
             else if (gameObject.tag.Equals("GreenClown"))
             {
-                gameObject.SendMessageUpwards("Green");
+                gameObject.BroadcastMessage("Green");
             }
 
-
             // turn gravity on for hinge to activate
-            GetComponent<Rigidbody>().useGravity = true;
-            GetComponent<Rigidbody>().isKinematic = false;
-          }
-     }
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
 }

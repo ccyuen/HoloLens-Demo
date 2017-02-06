@@ -24,9 +24,8 @@ public class LampTriggerEvent : MonoBehaviour {
         // if the tag of the colliding object is equal to RedCube then trigger an event else do nothing
         if (object2.gameObject.tag.Equals("RedCube"))
         {
-            Debug.LogError("is staying");
             // send a message to the redcube to say that the lamp is colliding with the redcube
-            gameObject.BroadcastMessage("isTouching");
+            BroadcastMessage("isTouching");
         }
     }
 
@@ -36,9 +35,8 @@ public class LampTriggerEvent : MonoBehaviour {
         // if the tab of the colliding object is equal to RedCube then trigger an event else do nothing
         if (object2.gameObject.tag.Equals("RedCube"))
         {
-            Debug.LogError("has exited");
             // send a message to the redcube to say that the lamp is no longer colliding with the redcube
-            gameObject.BroadcastMessage("isNotTouching"); // light.gameObject.BroadcastMessage("isNotTouching");
+            BroadcastMessage("isNotTouching");
         }
     }
 }
