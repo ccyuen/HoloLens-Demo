@@ -12,7 +12,7 @@ public class Flying : MonoBehaviour {
     //private Rigidbody shiprb;
     public ParticleSystem leftBooster;
     public ParticleSystem rightBooster;
-    public float speed = 3f;
+    public float speed = 1.5f;
 
     void Start()
     {
