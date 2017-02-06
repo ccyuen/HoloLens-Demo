@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloLensDemo", "HoloLensDemo.csproj", "{0EDB0B0D-B947-F09C-EB21-E65D854AFD55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloLensDemo.Editor", "HoloLensDemo.Editor.csproj", "{EC841C62-0D49-BD5D-2AE8-1E538CAC4E1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{0EDB0B0D-B947-F09C-EB21-E65D854AFD55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EDB0B0D-B947-F09C-EB21-E65D854AFD55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EDB0B0D-B947-F09C-EB21-E65D854AFD55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC841C62-0D49-BD5D-2AE8-1E538CAC4E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC841C62-0D49-BD5D-2AE8-1E538CAC4E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC841C62-0D49-BD5D-2AE8-1E538CAC4E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC841C62-0D49-BD5D-2AE8-1E538CAC4E1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

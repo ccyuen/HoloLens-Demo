@@ -8,7 +8,7 @@ public class CannonBehavior : MonoBehaviour
 {
     private GestureRecognizer _gestureRecognizer;
 
-    public float ForceMagnitude = 300f;
+    public float ForceMagnitude = 200f;
     public Material CannonMaterial;
     public AudioSource ShootSound;
     public AudioClip CollisionClip;
@@ -49,7 +49,7 @@ public class CannonBehavior : MonoBehaviour
         //    ShootSound.Play();
 
         var eyeball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        eyeball.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        eyeball.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         eyeball.GetComponent<Renderer>().material = CannonMaterial;
 
         var rigidBody = eyeball.AddComponent<Rigidbody>();
