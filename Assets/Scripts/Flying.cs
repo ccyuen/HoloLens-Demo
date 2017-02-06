@@ -1,8 +1,10 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
-public class Flying : MonoBehaviour {
+public class Flying : MonoBehaviour, IInputClickHandler
+{
 
     bool selected = false;
    // Vector3 angle = new Vector3(0, 0, 0);
@@ -12,7 +14,7 @@ public class Flying : MonoBehaviour {
     //private Rigidbody shiprb;
     public ParticleSystem leftBooster;
     public ParticleSystem rightBooster;
-    public float speed = 1.5f;
+    public float speed;
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class Flying : MonoBehaviour {
         // initialize angle
     }
 
-    void OnSelect()
+    public virtual void OnInputClicked(InputEventData eventData)
     {
         // On each Select gesture, toggle whether the user is in placing mode.
         selected = !selected;
