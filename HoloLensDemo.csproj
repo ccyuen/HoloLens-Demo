@@ -346,6 +346,7 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\TextToSpeechOnTap.cs" />
     <Compile Include="Assets\Scripts\AudioCollisionBehaviour.cs" />
     <Compile Include="Assets\Scripts\CannonBehavior.cs" />
+    <Compile Include="Assets\Scripts\ClownMovement.cs" />
     <Compile Include="Assets\Scripts\ConstantRotation.cs" />
     <Compile Include="Assets\Scripts\Flying.cs" />
     <Compile Include="Assets\Scripts\HonkHonk.cs" />

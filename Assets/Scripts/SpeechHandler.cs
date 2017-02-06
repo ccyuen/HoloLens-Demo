@@ -9,16 +9,16 @@ public class SpeechHandler : MonoBehaviour
     bool selected = false;
     //public AudioSource backgroundMusic;
 
-    public string HidePlaneCmd = "hide world";
-    public string ShowPlaneCMD = "show world";
-    public string ResetSceneCmd = "reset scene";
-    public string ShootCmd = "fire";
-    public string EnableShootCmd = "enable";
-    public string DisableShootCmd = "disable";
-    public string EnableMusicCmd = "on";
-    public string DisableMusicCmd = "off";
-    public string SpawnCmd = "spawn";
-    public string DestroyCmd = "destroy";
+    public string HidePlaneCmd;//= "hide world";
+    public string ShowPlaneCMD;//= "show world";
+    public string ResetSceneCmd;// = "reset scene";
+    public string ShootCmd;//= "fire";
+    public string EnableShootCmd;//= "enable";
+    public string DisableShootCmd;// = "disable";
+    public string EnableMusicCmd;// = "on";
+    public string DisableMusicCmd;// = "off";
+    public string SpawnCmd;// = "spawn";
+    public string DestroyCmd;// = "destroy";
 
     private bool isGazing = false;
 

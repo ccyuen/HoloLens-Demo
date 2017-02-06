@@ -51,6 +51,7 @@ public class CannonBehavior : MonoBehaviour
         var eyeball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         eyeball.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         eyeball.GetComponent<Renderer>().material = CannonMaterial;
+        eyeball.tag = "Bullet";
 
         var rigidBody = eyeball.AddComponent<Rigidbody>();
         rigidBody.mass = 0.5f;

@@ -6,7 +6,10 @@ TagManager:
   tags:
   - LampBase
   - RedCube
-  - Tip
+  - BlueClown
+  - RedClown
+  - GreenClown
+  - MovingClown
   layers:
   - Default
   - TransparentFX
@@ -39,7 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Layer 31
   m_SortingLayers:
   - name: Default
     uniqueID: 0

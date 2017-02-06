@@ -11,7 +11,7 @@ public class Flying : MonoBehaviour, IInputClickHandler
 
     public GameObject ship;
     public GameObject path;
-    //private Rigidbody shiprb;
+    private Rigidbody rigiB;
     public ParticleSystem leftBooster;
     public ParticleSystem rightBooster;
     public float speed;
@@ -20,7 +20,7 @@ public class Flying : MonoBehaviour, IInputClickHandler
     {
         //y = 0;
         selected = false;
-        //shiprb = ship.GetComponent<Rigidbody>();
+        rigiB = this.GetComponent<Rigidbody>();
         leftBooster.Stop();
         rightBooster.Stop();
         // initialize angle
@@ -42,6 +42,9 @@ public class Flying : MonoBehaviour, IInputClickHandler
             // play rocket launch sound clip
             //audio.Play();
 
+            // turn off gravity
+            rigiB.useGravity = false;
+
             // turn on particle systems
             leftBooster.Play();
             rightBooster.Play();
@@ -51,7 +54,10 @@ public class Flying : MonoBehaviour, IInputClickHandler
         {
             // stop object from rotating
             path.transform.Rotate(Vector3.zero);
-            //path.transform.eulerAngles = new Vector3(0, path.transform.localRotation.y, 0);
+
+            // turn on gravity
+            rigiB.useGravity = true;
+
             // turn off particle systems
             leftBooster.Stop();
             rightBooster.Stop();
