@@ -349,9 +349,8 @@
     <Compile Include="Assets\Scripts\ClownMovement.cs" />
     <Compile Include="Assets\Scripts\ConstantRotation.cs" />
     <Compile Include="Assets\Scripts\Flying.cs" />
-    <Compile Include="Assets\Scripts\HonkHonk.cs" />
     <Compile Include="Assets\Scripts\LampTriggerEvent.cs" />
-    <Compile Include="Assets\Scripts\SoccerBallKick.cs" />
+    <Compile Include="Assets\Scripts\Scoring.cs" />
     <Compile Include="Assets\Scripts\SpeechHandler.cs" />
     <Compile Include="Assets\Scripts\TapToPlace.cs" />
     <Compile Include="Assets\Scripts\TurnOnLamp.cs" />

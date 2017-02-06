@@ -20,6 +20,8 @@ public class SpeechHandler : MonoBehaviour
     public string SpawnCmd;// = "spawn";
     public string DestroyCmd;// = "destroy";
 
+    public string resetClownCmd;
+
     private bool isGazing = false;
 
     private KeywordRecognizer _keywordRecognizer;
@@ -73,15 +75,9 @@ public class SpeechHandler : MonoBehaviour
         {
             playBackgroundMusic(0);
         }*/
-        else if (cmd == SpawnCmd)
+        else if (cmd == resetClownCmd)
         {
-            if (selected)
-                spawn();   
-        }
-        else if (cmd == DestroyCmd)
-        {
-            if (selected)
-                destroy();
+            //SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
         }
     }
 

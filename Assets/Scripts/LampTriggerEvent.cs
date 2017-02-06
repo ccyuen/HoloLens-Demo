@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class LampTriggerEvent : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    //public GameObject light;
 
     // when the cube first touches the lamp
     void OnCollisionEnter(Collision object2)
@@ -15,8 +12,9 @@ public class LampTriggerEvent : MonoBehaviour {
         // if the tag of the colliding object is equal to RedCube then trigger an event else do nothing
         if (object2.gameObject.tag.Equals("RedCube"))
         {
+            Debug.LogError("has entered");
             // send a message to the redcube to say that the lamp has collided with the redcube
-            this.SendMessageUpwards("isTouching");
+            gameObject.BroadcastMessage("isTouching");
         }
     }
 
@@ -26,8 +24,9 @@ public class LampTriggerEvent : MonoBehaviour {
         // if the tag of the colliding object is equal to RedCube then trigger an event else do nothing
         if (object2.gameObject.tag.Equals("RedCube"))
         {
+            Debug.LogError("is staying");
             // send a message to the redcube to say that the lamp is colliding with the redcube
-            this.SendMessageUpwards("isTouching");
+            gameObject.BroadcastMessage("isTouching");
         }
     }
 
@@ -37,8 +36,9 @@ public class LampTriggerEvent : MonoBehaviour {
         // if the tab of the colliding object is equal to RedCube then trigger an event else do nothing
         if (object2.gameObject.tag.Equals("RedCube"))
         {
+            Debug.LogError("has exited");
             // send a message to the redcube to say that the lamp is no longer colliding with the redcube
-            this.SendMessageUpwards("isNotTouching");
+            gameObject.BroadcastMessage("isNotTouching"); // light.gameObject.BroadcastMessage("isNotTouching");
         }
     }
 }
