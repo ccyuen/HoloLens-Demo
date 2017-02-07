@@ -16,7 +16,7 @@ namespace HoloToolkit.Unity.SpatialMapping
     public partial class SpatialMappingManager : Singleton<SpatialMappingManager>
     {
         [Tooltip("The physics layer for spatial mapping objects to be set to.")]
-        public int PhysicsLayer = 31;
+        public int PhysicsLayer;
 
         [Tooltip("The material to use for rendering spatial mapping data.")]
         [SerializeField]

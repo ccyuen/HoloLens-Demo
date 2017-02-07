@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnOnLamp : MonoBehaviour {
-    public Material[] mat = new Material[2];
+    public Material off;
+    public Material on;
     public Light lampLight;
-    private bool touching = false;
+    private bool touching;
 
     void Start()
     {
-        mat = GetComponent<Renderer>().materials;
+        touching = false;
         lampLight.enabled = false;
     }
     
     // called by LampTriggerEvent once the cube is colliding with the base of the lamp
-    void isTouching ()
+    void isTouching()
     {
         touching = true;
     }
@@ -25,18 +26,18 @@ public class TurnOnLamp : MonoBehaviour {
         touching = false;
     }
 
-    void update()
+    void Update()
     {
         if (touching)
         {
             // change the lamp light material to on
-            GetComponent<Renderer>().material = mat[1];
+            gameObject.GetComponent<Renderer>().material = on;
             lampLight.enabled = true;
         }
         else
         {
             // change the lamp light material to off
-            GetComponent<Renderer>().material = mat[0];
+            gameObject.GetComponent<Renderer>().material = off;
             lampLight.enabled = false;
         }
     }

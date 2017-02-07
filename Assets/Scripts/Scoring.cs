@@ -7,28 +7,26 @@ public class Scoring : MonoBehaviour {
     public TextMesh winText; // "you win!"
     public TextMesh scoreText; // displays score
     public TextMesh resetText; // click text to reset game
-    private int score = 0;
-    private bool reset = false;
+    private int score;
 
     void Start()
     {
         winText.text = "";
         score = 0;
-        reset = false;
     }
 
     // when a clown is hit
-    void Blue()
+    public void Blue()
     {
         score += 5;
     }
 
-    void Red()
+    public void Red()
     {
         score += 3;
     }
 
-    void Green()
+    public void Green()
     {
         score++;
     }
@@ -45,15 +43,5 @@ public class Scoring : MonoBehaviour {
             //scoreText.CrossFadeAlpha(0.0f, 1.5f, false);
             //winText2.CrossFadeAlpha(0.0f, 1.5f, false);
         }
-        if (reset)
-        {
-            winText.text = "test this text";
-        }
-    }
-
-    public virtual void OnInputClicked(InputEventData eventData)
-    {
-        // On each Select gesture, reset the game
-        reset = true;
     }
 }

@@ -7,12 +7,22 @@ public class ClownMovement : MonoBehaviour
     private float speed = 0.25f;
     private bool notHit;
     private bool limit = false;
+    private bool dead;
+    private GameObject ChildGameObject1;
+    private MeshRenderer child1;
+    private GameObject ChildGameObject2;
+    private MeshRenderer child2;
     HingeJoint hinge;
 
     void Start()
     {
         notHit = true;
+        dead = false;
         hinge = gameObject.GetComponent<HingeJoint>();
+        ChildGameObject1 = gameObject.transform.GetChild(0).gameObject;
+        ChildGameObject2 = gameObject.transform.GetChild(1).gameObject;
+        child1 = ChildGameObject1.GetComponent(typeof(MeshRenderer)) as MeshRenderer;
+        child2 = ChildGameObject2.GetComponent(typeof(MeshRenderer)) as MeshRenderer;
     }
 
     // Update is called once per frame
@@ -44,52 +54,50 @@ public class ClownMovement : MonoBehaviour
                         break;
                 }
             }
+            else
+            {
+                transform.Translate(Vector3.zero, Space.World); // stop movement
+            }
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Bullet"))
+        if (!dead)
         {
-            if (gameObject.tag.Equals("BlueClown"))
+            if (collision.gameObject.tag.Equals("Bullet"))
             {
-                gameObject.BroadcastMessage("Blue"); // score
-                notHit = false; // stop update for movement
-                transform.Translate(Vector3.zero, Space.World); // stop movement
+                if (gameObject.tag.Equals("BlueClown"))
+                {
+                    gameObject.SendMessageUpwards("Blue"); // score
+                    notHit = false; // stop update for movement
+                }
+                else if (gameObject.tag.Equals("RedClown"))
+                {
+                    gameObject.SendMessageUpwards("Red");
 
-
-                // add the hinge
-                /*gameObject.AddComponent<HingeJoint>();
-                HingeJoint hinge = this.GetComponent<HingeJoint>();
-                JointLimits limits = hinge.limits;
-                hinge.useLimits = true;
-                hinge.enableCollision = true;
-                hinge.enablePreprocessing = true;
-                hinge.autoConfigureConnectedAnchor = true;
-                hinge.axis = new Vector3(0, 0, 0);
-                hinge.connectedAnchor = new Vector3(2.016f, 0.3929849f, -0.4620051f);
-                limits.min = 0;
-                limits.bounciness = 0;
-                limits.bounceMinVelocity = 0;
-                limits.max = 90;
-                hinge.breakForce = Mathf.Infinity;
-                hinge.breakTorque = Mathf.Infinity;
-                hinge.limits = limits;
-                hinge.anchor = new Vector3(-0.14f, -0.117f, 0.107f);*/
+                }
+                else if (gameObject.tag.Equals("GreenClown"))
+                {
+                    gameObject.SendMessageUpwards("Green");
+                }
+                // turn gravity on for hinge to activate
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.GetComponent<Rigidbody>().mass = 300;
+                dead = true;
             }
-            else if (gameObject.tag.Equals("RedClown"))
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (!dead)
+        {
+            if (collision.gameObject.tag.Equals("Bullet"))
             {
-                gameObject.BroadcastMessage("Red");
-
+                Destroy(collision.gameObject);
             }
-            else if (gameObject.tag.Equals("GreenClown"))
-            {
-                gameObject.BroadcastMessage("Green");
-            }
-
-            // turn gravity on for hinge to activate
-            gameObject.GetComponent<Rigidbody>().useGravity = true;
-            gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 }

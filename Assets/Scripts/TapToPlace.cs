@@ -81,6 +81,8 @@ namespace HoloToolkit.Unity.SpatialMapping
 
                 DetermineParent();
             }
+
+            spatialMappingManager.DrawVisualMeshes = false;
         }
 
         protected virtual void Update()
@@ -125,24 +127,29 @@ namespace HoloToolkit.Unity.SpatialMapping
 
         public virtual void OnInputClicked(InputEventData eventData)
         {
-            // On each tap gesture, toggle whether the user is in placing mode.
-            IsBeingPlaced = !IsBeingPlaced;
-
-            // If the user is in placing mode, display the spatial mapping mesh.
-            if (IsBeingPlaced)
+            // if the user is in shooting mode and or the user is already holding an object, disable tapping and placing objects
+            if (!SpeechHandler.shooting)
             {
-                spatialMappingManager.DrawVisualMeshes = true;
 
-                Debug.Log(gameObject.name + " : Removing existing world anchor if any.");
+                // On each tap gesture, toggle whether the user is in placing mode.
+                IsBeingPlaced = !IsBeingPlaced;
 
-                anchorManager.RemoveAnchor(gameObject);
-            }
-            // If the user is not in placing mode, hide the spatial mapping mesh.
-            else
-            {
-                spatialMappingManager.DrawVisualMeshes = false;
-                // Add world anchor when object placement is done.
-                anchorManager.AttachAnchor(gameObject, SavedAnchorFriendlyName);
+                // If the user is in placing mode, display the spatial mapping mesh.
+                if (IsBeingPlaced)
+                {
+                    spatialMappingManager.DrawVisualMeshes = true;
+
+                    Debug.Log(gameObject.name + " : Removing existing world anchor if any.");
+
+                    anchorManager.RemoveAnchor(gameObject);
+                }
+                // If the user is not in placing mode, hide the spatial mapping mesh.
+                else
+                {
+                    spatialMappingManager.DrawVisualMeshes = false;
+                    // Add world anchor when object placement is done.
+                    anchorManager.AttachAnchor(gameObject, SavedAnchorFriendlyName);
+                }
             }
         }
 

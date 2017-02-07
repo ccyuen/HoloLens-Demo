@@ -1,44 +1,43 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Windows.Speech;
+using HoloToolkit.Unity.InputModule;
 
 public class SpeechHandler : MonoBehaviour
 {
+    // for class TapToPlace check to make sure that user is not picking up multiple objects
+    public static bool HoldingObject;
+
     public GameObject world;
     public CannonBehavior Cannon;
-    bool selected = false;
     //public AudioSource backgroundMusic;
 
     public string HidePlaneCmd;//= "hide world";
     public string ShowPlaneCMD;//= "show world";
     public string ResetSceneCmd;// = "reset scene";
+
     public string ShootCmd;//= "fire";
     public string EnableShootCmd;//= "enable";
     public string DisableShootCmd;// = "disable";
-    public string EnableMusicCmd;// = "on";
-    public string DisableMusicCmd;// = "off";
-    public string SpawnCmd;// = "spawn";
-    public string DestroyCmd;// = "destroy";
-
-    public string resetClownCmd;
-
-    private bool isGazing = false;
+    public static bool shooting;
 
     private KeywordRecognizer _keywordRecognizer;
 
     void Start()
     {
-        _keywordRecognizer = new KeywordRecognizer(new[] { HidePlaneCmd, ShowPlaneCMD, ResetSceneCmd, ShootCmd, EnableShootCmd, DisableShootCmd, EnableMusicCmd, DisableMusicCmd });
+        _keywordRecognizer = new KeywordRecognizer(new[] { HidePlaneCmd, ShowPlaneCMD, ResetSceneCmd, ShootCmd, EnableShootCmd, DisableShootCmd });
         _keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         _keywordRecognizer.Start();
-        //backgroundMusic = GetComponent<AudioSource>();
+        shooting = false;
+        HoldingObject = false;
     }
 
-    void OnSelect()
+    /*public virtual void OnInputClicked(InputEventData eventData)
     {
         // On each Select gesture, toggle whether the user is in placing mode.
-        selected = !selected;
-    }
+        if (!shooting)
+            selected = !selected;
+    }*/
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
@@ -61,53 +60,21 @@ public class SpeechHandler : MonoBehaviour
         }
         else if (cmd == EnableShootCmd)
         {
-            Cannon.enableShoot();
+            if (!HoldingObject)
+            {
+                Cannon.enableShoot();
+                shooting = true;
+            }
         }
         else if (cmd == DisableShootCmd)
         {
-            Cannon.disableShoot();
-        }/*
-        else if (cmd == EnableMusicCmd)
-        {
-           playBackgroundMusic(1);
-        }
-        else if (cmd == DisableMusicCmd)
-        {
-            playBackgroundMusic(0);
-        }*/
-        else if (cmd == resetClownCmd)
-        {
-            //SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+            if (!HoldingObject)
+            {
+                Cannon.disableShoot();
+                shooting = false;
+            }
         }
     }
-
-    /*
-    private void playBackgroundMusic(int num)
-    {
-        if (num == 1) // play music
-        {
-            backgroundMusic.mute = false;
-        }
-        else if (num == 0) // stop music
-        {
-            backgroundMusic.mute = true;
-        }
-    }*/
-
-    
-    // create more holograms that is being gazed at
-    void spawn()
-    {
-        //if (FocusedObject != null)
-            //GameObject newObject = (GameObject)Instantiate(Resources.Load("bulbasaur"));
-    }
-
-    // destroy hologram that is being gazed at
-    void destroy()
-    {
-        //destroy(gameObject);
-    }
-
 
     private void OnDestroy()
     {

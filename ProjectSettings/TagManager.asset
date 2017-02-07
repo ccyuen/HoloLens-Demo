@@ -10,6 +10,8 @@ TagManager:
   - RedClown
   - GreenClown
   - MovingClown
+  - Bullet
+  - Cursor
   layers:
   - Default
   - TransparentFX

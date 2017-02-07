@@ -51,7 +51,7 @@ public class CannonBehavior : MonoBehaviour
         var eyeball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         eyeball.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         eyeball.GetComponent<Renderer>().material = CannonMaterial;
-        eyeball.tag = "Bullet";
+        
 
         var rigidBody = eyeball.AddComponent<Rigidbody>();
         rigidBody.mass = 0.5f;
@@ -59,7 +59,7 @@ public class CannonBehavior : MonoBehaviour
         var forward = transform.forward;
         forward = Quaternion.AngleAxis(-10, transform.right) * forward;
         rigidBody.AddForce(forward * ForceMagnitude);
-
+        eyeball.tag = "Bullet";
         eyeball.AddComponent<AudioCollisionBehaviour>().SoundSoftCrash = CollisionClip;
     }
 
