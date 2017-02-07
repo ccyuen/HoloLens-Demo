@@ -8,7 +8,7 @@ public class ResetDownAClown : MonoBehaviour, IInputClickHandler
 
     public GameObject game;
     public TextMesh reset;
-    private Vector3 cords;
+    private Vector3 cords = new Vector3();
     private Quaternion rotation;
 
     void Start()
@@ -51,7 +51,6 @@ public class ResetDownAClown : MonoBehaviour, IInputClickHandler
     {
         // On each Select gesture, reset the game
         Destroy(transform.parent.gameObject);
-        GameObject newGame = Instantiate(game, cords, rotation);
-        newGame.SetActive(true);
+        Instantiate(game, cords, rotation);
     }
 }

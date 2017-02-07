@@ -37,11 +37,6 @@ public class Scoring : MonoBehaviour {
         if (score >= 21)
         {
             winText.text = "You win!";
-            //Delay(5000).Wait();
-            //winText1.CrossFadeAlpha(0.0f, 1.5f, false);
-            //Thread.Sleep(3000);
-            //scoreText.CrossFadeAlpha(0.0f, 1.5f, false);
-            //winText2.CrossFadeAlpha(0.0f, 1.5f, false);
         }
     }
 }

@@ -5,24 +5,16 @@ using UnityEngine;
 public class ClownMovement : MonoBehaviour
 {
     private float speed = 0.25f;
-    private bool notHit;
     private bool limit = false;
     private bool dead;
-    private GameObject ChildGameObject1;
-    private MeshRenderer child1;
-    private GameObject ChildGameObject2;
-    private MeshRenderer child2;
+    private bool alreadyHit;
     HingeJoint hinge;
 
     void Start()
     {
-        notHit = true;
         dead = false;
+        alreadyHit = false;
         hinge = gameObject.GetComponent<HingeJoint>();
-        ChildGameObject1 = gameObject.transform.GetChild(0).gameObject;
-        ChildGameObject2 = gameObject.transform.GetChild(1).gameObject;
-        child1 = ChildGameObject1.GetComponent(typeof(MeshRenderer)) as MeshRenderer;
-        child2 = ChildGameObject2.GetComponent(typeof(MeshRenderer)) as MeshRenderer;
     }
 
     // Update is called once per frame
@@ -30,7 +22,7 @@ public class ClownMovement : MonoBehaviour
     {
         if (gameObject.tag.Equals("BlueClown"))
         {
-            if (notHit)
+            if (!dead)
             {
                 if (transform.position.z <= -0.4620051f)
                 {
@@ -54,50 +46,59 @@ public class ClownMovement : MonoBehaviour
                         break;
                 }
             }
-            else
+            else if (dead && !alreadyHit)
             {
-                transform.Translate(Vector3.zero, Space.World); // stop movement
+                deadClown(1);
             }
+        }
+        else if (gameObject.tag.Equals("RedClown") && dead && !alreadyHit)
+        {
+            deadClown(2);
+        }
+        else if (gameObject.tag.Equals("GreenClown") && dead && !alreadyHit)
+        {
+            deadClown(3);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!dead)
+        if (collision.gameObject.tag.Equals("Bullet"))
         {
-            if (collision.gameObject.tag.Equals("Bullet"))
-            {
-                if (gameObject.tag.Equals("BlueClown"))
-                {
-                    gameObject.SendMessageUpwards("Blue"); // score
-                    notHit = false; // stop update for movement
-                }
-                else if (gameObject.tag.Equals("RedClown"))
-                {
-                    gameObject.SendMessageUpwards("Red");
-
-                }
-                else if (gameObject.tag.Equals("GreenClown"))
-                {
-                    gameObject.SendMessageUpwards("Green");
-                }
-                // turn gravity on for hinge to activate
-                gameObject.GetComponent<Rigidbody>().useGravity = true;
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                gameObject.GetComponent<Rigidbody>().mass = 300;
-                dead = true;
-            }
+            dead = true;
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (!dead)
+        if (collision.gameObject.tag.Equals("Bullet"))
         {
-            if (collision.gameObject.tag.Equals("Bullet"))
+            DestroyImmediate(collision.gameObject);
+        }   
+    }
+
+    private void deadClown(int clownType)
+    {
+        if (transform.rotation.x > 0)
+        {
+            if (clownType == 1) // blue
             {
-                Destroy(collision.gameObject);
+                gameObject.SendMessageUpwards("Blue"); // score
+                transform.Translate(Vector3.zero, Space.World); // stop movement
             }
+            else if (clownType == 2) // red
+            {
+                gameObject.SendMessageUpwards("Red"); // score
+            }
+            else if (clownType == 3) // green
+            {
+                gameObject.SendMessageUpwards("Green"); // score
+
+            }
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.GetComponent<Rigidbody>().mass = 300;
+            alreadyHit = true;
         }
     }
 }
