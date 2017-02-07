@@ -12,6 +12,8 @@ TagManager:
   - MovingClown
   - Bullet
   - Cursor
+  - Reset
+  - Platform1
   layers:
   - Default
   - TransparentFX

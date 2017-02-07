@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using HoloToolkit.Unity.InputModule;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.SpatialMapping
@@ -91,6 +92,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             // update the placement to match the user's gaze.
             if (IsBeingPlaced)
             {
+                gameObject.layer = 0;
                 // Do a raycast into the world that will only hit the Spatial Mapping mesh.
                 Vector3 headPosition = Camera.main.transform.position;
                 Vector3 gazeDirection = Camera.main.transform.forward;
@@ -98,6 +100,10 @@ namespace HoloToolkit.Unity.SpatialMapping
                 RaycastHit hitInfo;
                 if (Physics.Raycast(headPosition, gazeDirection, out hitInfo, 30.0f, spatialMappingManager.LayerMask))
                 {
+                    if (gameObject.tag.Equals("Platform1"))
+                    {
+                        gameObject.SendMessageUpwards("Moving", hitInfo.point);
+                    }
                     // Rotate this object to face the user.
                     Quaternion toQuat = Camera.main.transform.localRotation;
                     toQuat.x = 0;
@@ -123,6 +129,10 @@ namespace HoloToolkit.Unity.SpatialMapping
                     }
                 }
             }
+            else
+            {
+                gameObject.layer = 31;
+            }
         }
 
         public virtual void OnInputClicked(InputEventData eventData)
@@ -130,7 +140,6 @@ namespace HoloToolkit.Unity.SpatialMapping
             // if the user is in shooting mode and or the user is already holding an object, disable tapping and placing objects
             if (!SpeechHandler.shooting)
             {
-
                 // On each tap gesture, toggle whether the user is in placing mode.
                 IsBeingPlaced = !IsBeingPlaced;
 

@@ -32,10 +32,10 @@ namespace HoloToolkit.Unity.SpatialMapping.Tests
         private void Start()
         {
             // Update surfaceObserver and storedMeshes to use the same material during scanning.
-            SpatialMappingManager.Instance.SetSurfaceMaterial(defaultMaterial);
-
+            //SpatialMappingManager.Instance.SetSurfaceMaterial(defaultMaterial);
+            SpatialMappingManager.Instance.DrawVisualMeshes = false;
             // Register for the MakePlanesComplete event.
-            SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
+            //SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace HoloToolkit.Unity.SpatialMapping.Tests
                         // Stop the observer.
                         SpatialMappingManager.Instance.StopObserver();
                     }
-
+                    SpatialMappingManager.Instance.DrawVisualMeshes = true;
                     // Call CreatePlanes() to generate planes.
-                    CreatePlanes();
+                    //CreatePlanes();
 
                     // Set meshesProcessed to true.
                     meshesProcessed = true;

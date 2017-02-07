@@ -39,4 +39,16 @@ public class Scoring : MonoBehaviour {
             winText.text = "You win!";
         }
     }
+
+    void Reset()
+    {
+        winText.text = "";
+        score = 0;
+        gameObject.BroadcastMessage("Reset1");
+    }
+
+    void Moving(Vector3 hitInfo)
+    {
+        gameObject.BroadcastMessage("Moving1", hitInfo);
+    }
 }

@@ -63,13 +63,17 @@ namespace HoloToolkit.Unity.InputModule
         /// GazeManager.Instance.RaycastLayerMasks = new LayerMask[] { nonSR, sr };
         /// </summary>
         [Tooltip("The LayerMasks, in prioritized order, that are used to determine the HitObject when raycasting.\n\nExample Usage:\n\n// Allow the cursor to hit SR, but first prioritize any DefaultRaycastLayers (potentially behind SR)\n\nint sr = LayerMask.GetMask(\"SR\");\nint nonSR = Physics.DefaultRaycastLayers & ~sr;\nGazeManager.Instance.RaycastLayerMasks = new LayerMask[] { nonSR, sr };")]
-        public LayerMask[] RaycastLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
+        //public LayerMask[] RaycastLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
+        private static int sr = LayerMask.GetMask("SR");
+        private static int nonSR = Physics.DefaultRaycastLayers & ~sr;
+        public LayerMask[] RaycastLayerMasks = new LayerMask[] { nonSR, sr};
 
-        /// <summary>
-        /// Current stabilization method, used to smooth out the gaze ray data.
-        /// If left null, no stabilization will be performed.
-        /// </summary>
-        [Tooltip("Stabilizer, if any, used to smooth out the gaze ray data.")]
+
+    /// <summary>
+    /// Current stabilization method, used to smooth out the gaze ray data.
+    /// If left null, no stabilization will be performed.
+    /// </summary>
+    [Tooltip("Stabilizer, if any, used to smooth out the gaze ray data.")]
         public BaseRayStabilizer Stabilizer = null;
 
         /// <summary>
@@ -104,7 +108,9 @@ namespace HoloToolkit.Unity.InputModule
             // Add default RaycastLayers as first layerPriority
             if (RaycastLayerMasks == null || RaycastLayerMasks.Length == 0)
             {
-                RaycastLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
+                sr = LayerMask.GetMask("SR");
+                nonSR = Physics.DefaultRaycastLayers & ~sr;
+                RaycastLayerMasks = new LayerMask[] { nonSR, sr };
             }
 
             if (GazeTransform == null)
@@ -177,12 +183,13 @@ namespace HoloToolkit.Unity.InputModule
             if (RaycastLayerMasks.Length == 1)
             {
                 IsGazingAtObject = Physics.Raycast(GazeOrigin, GazeNormal, out hitInfo, MaxGazeCollisionDistance, RaycastLayerMasks[0]);
+                Debug.Log("Only 1 Layer");
             }
             else
             {
                 // Raycast across all layers and prioritize
                 RaycastHit? hit = PrioritizeHits(Physics.RaycastAll(new Ray(GazeOrigin, GazeNormal), MaxGazeCollisionDistance, -1));
-
+                Debug.Log("2 layers passes through else");
                 IsGazingAtObject = hit.HasValue;
                 if (IsGazingAtObject)
                 {
@@ -195,12 +202,18 @@ namespace HoloToolkit.Unity.InputModule
                 HitObject = HitInfo.collider.gameObject;
                 HitPosition = HitInfo.point;
                 lastHitDistance = HitInfo.distance;
+                if (HitInfo.collider.tag.Equals("Reset"))
+                {
+                    HitInfo.collider.BroadcastMessage("Reset2");
+                }
             }
             else
             {
                 HitObject = null;
                 HitPosition = GazeOrigin + (GazeNormal * lastHitDistance);
             }
+
+            
             return previousFocusObject;
         }
 

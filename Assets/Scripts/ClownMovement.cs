@@ -8,10 +8,14 @@ public class ClownMovement : MonoBehaviour
     private bool limit = false;
     private bool dead;
     private bool alreadyHit;
+    private Vector3 cords = new Vector3();
+    private Quaternion rotation;
     HingeJoint hinge;
 
     void Start()
     {
+        cords = gameObject.transform.position;
+        rotation = gameObject.transform.rotation;
         dead = false;
         alreadyHit = false;
         hinge = gameObject.GetComponent<HingeJoint>();
@@ -24,27 +28,22 @@ public class ClownMovement : MonoBehaviour
         {
             if (!dead)
             {
-                if (transform.position.z <= -0.4620051f)
+                if (transform.localPosition.x < -0.068f)
                 {
                     limit = true;
                 }
-                else if (transform.position.z >= 0.274f)
+                else if (transform.localPosition.x > 0.302002f)
                 {
                     limit = false;
                 }
 
 
-                switch (limit)
-                {
-                    case true:
-                        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
-                        hinge.anchor = new Vector3(-0.085f, -0.117f, 0.107f);
-                        break;
-                    case false:
-                        transform.Translate(Vector3.back * Time.deltaTime * speed, Space.World);
-                        hinge.anchor = new Vector3(-0.085f, -0.117f, 0.107f);
-                        break;
-                }
+                if (limit)
+                        transform.Translate(Vector3.right * Time.deltaTime * speed, Space.Self);
+                else
+                        transform.Translate(Vector3.left * Time.deltaTime * speed, Space.Self);
+                hinge.anchor = new Vector3(-0.085f, -0.117f, 0.107f);
+                //hinge.anchor = transform.localPosition;
             }
             else if (dead && !alreadyHit)
             {
@@ -69,12 +68,20 @@ public class ClownMovement : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Bullet"))
+        {
+            DestroyImmediate(collision.gameObject);
+        }
+    }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Bullet"))
         {
             DestroyImmediate(collision.gameObject);
-        }   
+        }
     }
 
     private void deadClown(int clownType)
@@ -100,5 +107,23 @@ public class ClownMovement : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().mass = 300;
             alreadyHit = true;
         }
+    }
+
+    void Reset1()
+    {
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().mass = 0.01f;
+        gameObject.transform.position = cords;
+        gameObject.transform.rotation = rotation;
+        alreadyHit = false;
+        dead = false;
+        cords = gameObject.transform.position;
+        rotation = gameObject.transform.rotation;
+    }
+
+    void Moving1(Vector3 hitInfo)
+    {
+        gameObject.GetComponent<HingeJoint>().transform.position = hitInfo;
     }
 }
