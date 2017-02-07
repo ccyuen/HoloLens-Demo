@@ -6,32 +6,39 @@ using HoloToolkit.Unity.InputModule;
 public class LeverPullDown : MonoBehaviour
 {
 
-    public GameObject window;
+    public GameObject curtain;
+    public GameObject leverHandle;
     private bool rotate;
+    public GameObject cylinder;
+    private Vector3 A;
+    private Vector3 B;
+    private Vector3 axis;
+    private bool stop;
 
     // Use this for initialization
     void Start()
     {
+        A = cylinder.GetComponent<Renderer>().bounds.center;
+        B = cylinder.GetComponent<Renderer>().bounds.center + new Vector3 (-2,0,0);
+        axis = B - A;
         rotate = false;
-        window.SetActive(false);
-        // window game object set false
+        stop = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rotate)
+        if (rotate && !stop)
         {
-
+            leverHandle.transform.RotateAround(A, axis, 20 * Time.deltaTime);
+            curtain.transform.Translate(Vector3.right * 0.15f * Time.deltaTime);
         }
 
-        //if (gameObject.transform.)
-        //{
-
-        //}
-        //rotate lever
-        //when lever is at certain angle, turn window on
-        window.SetActive(false);
+        if (curtain.transform.position.x >= 1.047f)
+        {
+            stop = true;
+            curtain.SetActive(false);
+        }
     }
 
     public virtual void OnInputClicked(InputEventData eventData)

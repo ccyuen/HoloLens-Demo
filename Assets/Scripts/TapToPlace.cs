@@ -5,6 +5,12 @@ using HoloToolkit.Unity.InputModule;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enumeration containing the surfaces on which a GameObject
+/// can be placed.  For simplicity of this sample, only one
+/// surface type is allowed to be selected.
+/// </summary>
+
 namespace HoloToolkit.Unity.SpatialMapping
 {
     /// <summary>
@@ -20,6 +26,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
     public class TapToPlace : MonoBehaviour, IInputClickHandler
     {
+       
         [Tooltip("Supply a friendly name for the anchor as the key name for the WorldAnchorStore.")]
         public string SavedAnchorFriendlyName = "SavedAnchorFriendlyName";
 
