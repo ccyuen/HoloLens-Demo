@@ -12,6 +12,8 @@ namespace HoloToolkit.Unity.InputModule
     /// </summary>
     public class GazeManager : Singleton<GazeManager>
     {
+        public bool isAlreadyPlacing = false;
+
         public delegate void FocusedChangedDelegate(GameObject previousObject, GameObject newObject);
 
         /// <summary>

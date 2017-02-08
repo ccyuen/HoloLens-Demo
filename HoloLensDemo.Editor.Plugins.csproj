@@ -196,7 +196,11 @@
     <None Include="Assets\Materials\Clock_Constraints_for_Animations\Readme.txt" />
     <None Include="Assets\Materials\CoffeeCup\Contact.txt" />
     <None Include="Assets\Materials\CoffeeCup\archibase.net.txt" />
+    <None Include="Assets\Materials\Jenga\archibase.net.txt" />
+    <None Include="Assets\NatureStarterKit2\info.txt" />
     <None Include="Assets\Occlusion.shader" />
+    <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\READ ME.txt" />
+    <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\Shader\CustomFoliage.shader" />
     <None Include="Assets\PreFabs\CoffeeCup\Contact.txt" />
     <None Include="Assets\PreFabs\CoffeeCup\archibase.net.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

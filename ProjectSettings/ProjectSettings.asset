@@ -414,29 +414,29 @@ PlayerSettings:
     WindowsStoreApps:
       AllJoyn: False
       BlockedChatMessages: False
-      Bluetooth: False
+      Bluetooth: True
       Chat: False
       CodeGeneration: False
       EnterpriseAuthentication: False
-      HumanInterfaceDevice: False
+      HumanInterfaceDevice: True
       InputInjectionBrokered: False
-      InternetClient: False
+      InternetClient: True
       InternetClientServer: True
-      Location: False
+      Location: True
       Microphone: True
       MusicLibrary: False
       Objects3D: True
       PhoneCall: False
       PicturesLibrary: False
       PrivateNetworkClientServer: True
-      Proximity: False
+      Proximity: True
       RemovableStorage: False
       SharedUserCertificates: False
       SpatialPerception: True
       UserAccountInformation: False
       VideosLibrary: False
       VoipCall: False
-      WebCam: False
+      WebCam: True
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 

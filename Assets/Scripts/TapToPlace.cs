@@ -158,7 +158,17 @@ namespace HoloToolkit.Unity.SpatialMapping
             if (!SpeechHandler.shooting)
             {
                 // On each tap gesture, toggle whether the user is in placing mode.
-                IsBeingPlaced = !IsBeingPlaced;
+                if (!this.IsBeingPlaced && !GazeManager.Instance.isAlreadyPlacing)
+                {
+                    IsBeingPlaced = true;
+                    GazeManager.Instance.isAlreadyPlacing = true;
+                }
+                else if (this.IsBeingPlaced)
+                {
+                    IsBeingPlaced = false;
+                    GazeManager.Instance.isAlreadyPlacing = false;
+                }
+                    
 
                 // If the user is in placing mode, display the spatial mapping mesh.
                 if (IsBeingPlaced)
