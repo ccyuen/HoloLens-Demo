@@ -7,6 +7,9 @@ public class Scoring : MonoBehaviour {
     public TextMesh winText; // "you win!"
     public TextMesh scoreText; // displays score
     public TextMesh resetText; // click text to reset game
+    public Camera mainCamera;
+    public AudioClip youWin;
+    public AudioClip clownHit;
     private int score;
 
     void Start()
@@ -19,16 +22,19 @@ public class Scoring : MonoBehaviour {
     public void Blue()
     {
         score += 5;
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
     }
 
     public void Red()
     {
         score += 3;
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
     }
 
     public void Green()
     {
         score++;
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
     }
 
     void Update()
@@ -37,6 +43,7 @@ public class Scoring : MonoBehaviour {
         if (score >= 21)
         {
             winText.text = "You win!";
+            AudioSource.PlayClipAtPoint(youWin, mainCamera.transform.position);
         }
     }
 

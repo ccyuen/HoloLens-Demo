@@ -6934,6 +6934,21 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 114296199989957546, guid: 254c5720bd846fe4fbf39cef554a00b6,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 618642472}
+    - target: {fileID: 114296199989957546, guid: 254c5720bd846fe4fbf39cef554a00b6,
+        type: 2}
+      propertyPath: clownHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 20c4896e9a1b85e4fb385c0de1b82465, type: 3}
+    - target: {fileID: 114296199989957546, guid: 254c5720bd846fe4fbf39cef554a00b6,
+        type: 2}
+      propertyPath: youWin
+      value: 
+      objectReference: {fileID: 8300000, guid: 1787453b77f75c54ca742a4152b25f52, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 254c5720bd846fe4fbf39cef554a00b6, type: 2}
   m_IsPrefabParent: 0
@@ -30500,6 +30515,11 @@ MonoBehaviour:
   CannonMaterial: {fileID: 2100000, guid: 06cd5cc29494d9d49a9f49fc674baa36, type: 2}
   ShootSound: {fileID: 618642470}
   CollisionClip: {fileID: 8300000, guid: 077142f5697bba2468a726398b1925a8, type: 3}
+--- !u!20 &618642472 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000013304850028, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
+    type: 2}
+  m_PrefabInternal: {fileID: 618642467}
 --- !u!1001 &618744024
 Prefab:
   m_ObjectHideFlags: 0
@@ -50223,6 +50243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3c982b906cf0d478db3d3a0876ce53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 618642472}
+  switchOn: {fileID: 8300000, guid: d11cf663ef93a3c4d922a0e26399369c, type: 3}
+  switchOff: {fileID: 8300000, guid: e97301a45978bee479185a36edcf8d42, type: 3}
 --- !u!64 &1098012807
 MeshCollider:
   m_ObjectHideFlags: 0

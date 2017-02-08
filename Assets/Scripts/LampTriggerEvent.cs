@@ -5,6 +5,9 @@ using UnityEngine;
 public class LampTriggerEvent : MonoBehaviour {
 
     private Vector3 position;
+    public Camera mainCamera;
+    public AudioClip switchOn;
+    public AudioClip switchOff;
 
     void Start()
     {
@@ -21,6 +24,7 @@ public class LampTriggerEvent : MonoBehaviour {
         {
             // send a message to the redcube to say that the lamp has collided with the redcube
             gameObject.SendMessageUpwards("isTouching");
+            AudioSource.PlayClipAtPoint(switchOn, mainCamera.transform.position);
         }
     }
 
@@ -43,6 +47,7 @@ public class LampTriggerEvent : MonoBehaviour {
         {
             // send a message to the redcube to say that the lamp is no longer colliding with the redcube
             gameObject.SendMessageUpwards("isNotTouching");
+            AudioSource.PlayClipAtPoint(switchOff, mainCamera.transform.position);
         }
     }
 }
