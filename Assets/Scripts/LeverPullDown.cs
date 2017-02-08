@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 
-public class LeverPullDown : MonoBehaviour
+public class LeverPullDown : MonoBehaviour, IInputClickHandler
 {
 
     public GameObject curtain;
@@ -43,6 +43,7 @@ public class LeverPullDown : MonoBehaviour
 
     public virtual void OnInputClicked(InputEventData eventData)
     {
+        Debug.Log("Has been selected!");
         rotate = !rotate;
     }
 }

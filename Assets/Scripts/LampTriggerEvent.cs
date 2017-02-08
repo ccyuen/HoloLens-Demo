@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class LampTriggerEvent : MonoBehaviour {
 
+    private Vector3 position;
+
+    void Start()
+    {
+        position = gameObject.transform.position;
+        gameObject.transform.position = new Vector3(Mathf.Clamp(gameObject.transform.position.x, position.x, position.x), Mathf.Clamp(gameObject.transform.position.y, position.y, position.y), Mathf.Clamp(gameObject.transform.position.z, position.z, position.z));
+    }
+
     //public GameObject light;
     // when the cube first touches the lamp
     void OnCollisionEnter(Collision object2)

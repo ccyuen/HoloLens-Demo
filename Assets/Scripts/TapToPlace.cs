@@ -100,6 +100,16 @@ namespace HoloToolkit.Unity.SpatialMapping
             if (IsBeingPlaced)
             {
                 gameObject.layer = 0;
+                if (gameObject.tag.Equals("Platform"))
+                {
+                    gameObject.transform.parent.Find("deskLamp/Lamp/Base").gameObject.layer = 0; 
+                }
+                else if (gameObject.tag.Equals("ChessBoard"))
+                {
+                    Debug.Log("Stack layer set to 0");
+                    gameObject.transform.parent.Find("Stack").gameObject.layer = 0;
+                }
+
                 // Do a raycast into the world that will only hit the Spatial Mapping mesh.
                 Vector3 headPosition = Camera.main.transform.position;
                 Vector3 gazeDirection = Camera.main.transform.forward;
