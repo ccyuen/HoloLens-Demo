@@ -11,9 +11,11 @@ public class Scoring : MonoBehaviour {
     public AudioClip youWin;
     public AudioClip clownHit;
     private int score;
+    private bool playOnce;
 
     void Start()
     {
+        playOnce = true;
         winText.text = "";
         score = 0;
     }
@@ -22,33 +24,35 @@ public class Scoring : MonoBehaviour {
     public void Blue()
     {
         score += 5;
-        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position, 0.3f);
     }
 
     public void Red()
     {
         score += 3;
-        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position, 0.3f);
     }
 
     public void Green()
     {
         score++;
-        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position);
+        AudioSource.PlayClipAtPoint(clownHit, mainCamera.transform.position, 0.3f);
     }
 
     void Update()
     {
         scoreText.text = "Score: " + score.ToString();
-        if (score >= 21)
+        if (score >= 21 && playOnce)
         {
             winText.text = "You win!";
-            AudioSource.PlayClipAtPoint(youWin, mainCamera.transform.position);
+            AudioSource.PlayClipAtPoint(youWin, mainCamera.transform.position, 0.8f);
+            playOnce = false;
         }
     }
 
     void Reset()
     {
+        playOnce = true;
         winText.text = "";
         score = 0;
         gameObject.BroadcastMessage("Reset1");

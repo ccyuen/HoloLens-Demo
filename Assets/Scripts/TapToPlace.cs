@@ -48,6 +48,9 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// Manages persisted anchors.
         /// </summary>
         protected WorldAnchorManager anchorManager;
+        public AudioClip place;
+        public AudioClip pickup;
+        public Camera mainCamera;
 
         /// <summary>
         /// Controls spatial mapping.  In this script we access spatialMappingManager
@@ -162,11 +165,13 @@ namespace HoloToolkit.Unity.SpatialMapping
                 {
                     IsBeingPlaced = true;
                     GazeManager.Instance.isAlreadyPlacing = true;
+                    AudioSource.PlayClipAtPoint(pickup, mainCamera.transform.position, 1f);
                 }
                 else if (this.IsBeingPlaced)
                 {
                     IsBeingPlaced = false;
                     GazeManager.Instance.isAlreadyPlacing = false;
+                    AudioSource.PlayClipAtPoint(place, mainCamera.transform.position, 1f);
                 }
                     
 

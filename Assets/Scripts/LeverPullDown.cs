@@ -10,14 +10,20 @@ public class LeverPullDown : MonoBehaviour, IInputClickHandler
     public GameObject leverHandle;
     private bool rotate;
     public GameObject cylinder;
+    public AudioClip lever;
+    public Camera mainCamera;
     private Vector3 A;
     private Vector3 B;
     private Vector3 axis;
     private bool stop;
+    private bool playSoundOnce;
+    private float totalAngle;
 
     // Use this for initialization
     void Start()
     {
+        totalAngle = 0;
+        playSoundOnce = true;
         A = cylinder.GetComponent<Renderer>().bounds.center;
         B = cylinder.GetComponent<Renderer>().bounds.center + new Vector3 (-2,0,0);
         axis = B - A;
@@ -30,20 +36,27 @@ public class LeverPullDown : MonoBehaviour, IInputClickHandler
     {
         if (rotate && !stop)
         {
-            leverHandle.transform.RotateAround(A, axis, 20 * Time.deltaTime);
-            curtain.transform.Translate(Vector3.right * 0.15f * Time.deltaTime);
+            if (playSoundOnce)
+            {
+                AudioSource.PlayClipAtPoint(lever, mainCamera.transform.position, 0.8f);
+                playSoundOnce = false;
+            }
+            leverHandle.transform.RotateAround(A, axis, 100 * Time.deltaTime);
+            totalAngle += 100 * Time.deltaTime;
         }
 
-        if (curtain.transform.position.x >= 1.047f)
+        if (totalAngle > 120)
         {
             stop = true;
-            curtain.SetActive(false);
+            curtain.transform.Translate(Vector3.right * 0.15f * Time.deltaTime);
+            if (curtain.transform.position.x >= 1.047f)
+                curtain.SetActive(false);
         }
     }
 
     public virtual void OnInputClicked(InputEventData eventData)
     {
         Debug.Log("Has been selected!");
-        rotate = !rotate;
+        rotate = true;
     }
 }
