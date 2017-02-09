@@ -8,6 +8,8 @@ public class ResetDownAClown : MonoBehaviour, IInputClickHandler
 
     public GameObject game;
     public TextMesh reset;
+    public Camera mainCamera;
+    public AudioClip resetSound;
     private Vector3 cords = new Vector3();
     private Quaternion rotation;
     private bool color;
@@ -37,6 +39,7 @@ public class ResetDownAClown : MonoBehaviour, IInputClickHandler
 
     public virtual void OnInputClicked(InputEventData eventData)
     {
+        AudioSource.PlayClipAtPoint(resetSound, mainCamera.transform.position, 2f);
         // On each Select gesture, reset the game
         gameObject.SendMessageUpwards("Reset");
     }
